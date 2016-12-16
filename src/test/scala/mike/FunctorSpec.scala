@@ -11,7 +11,6 @@ class FunctorSpec extends Properties("List Functor") {
       val stringID = (s: String) => s
       val stringListID = (ss: List[String]) => ss
       (ss: List[String]) =>
-        //println(s"string list: $ss")
         fmap(stringID)(ss) == stringListID(ss)
     }
 
@@ -30,7 +29,6 @@ class FunctorSpec extends Properties("List Functor") {
       val stringID = (s: String) => s
       val optionID = (ss: Option[String]) => ss
       (os: Option[String]) =>
-        //println(s"option string: $os")
         fmap(stringID)(os) == optionID(os)
     }
 
@@ -40,32 +38,24 @@ class FunctorSpec extends Properties("List Functor") {
       val f = (i: Int) => i.toString
       val g = (s: String) => s.length
       (maybe: Option[Int]) =>
-        //println(s"maybe option[Int]: $maybe")
         fmap(g compose f)(maybe) == (fmap(g) compose fmap(f))(maybe)
     }
 
-  property("run your dang functor0 functor") =
+  property("run your dang Functor0 functor") =
     forAll {
       (s: String) =>
-        runFunctor0(s)
+        import mike.Functor.Function0Functor._
+        val f = (s2: String) => s2.length
+        val lifted = fmap(() => s)(f)
+        lifted() == s.length
     }
 
-  def runFunctor0(s: String) = {
-    import mike.Functor.Function0Functor._
-    val f = (s: String) => s.length
-    val lifted = fmap(() => s)(f)
-    println("lifted:" + lifted())
-    lifted() == s.length
-  }
-
-  //  property("preserve composition for Function0Functor") = forAll {
-  //    import mike.Functor.Function0Functor._
-  //    val f = (s: String) => s.length
-  //    val lifted = fmap(() => "abcd")(f) //(s: String) => s.length
-  //    (s: String) =>
-  //      //println(s"function0 : $s")
-  //      lifted() == 3
-  //    //fmap(lifted compose f)(maybe) == (fmap(lifted) compose fmap(f))(maybe)
-  //  }
-
+  property("preserve identity for Function0 Functor") =
+    forAll {
+      (s: String) =>
+        import mike.Functor.Function0Functor._
+        val f = (s2: String) => s2.length
+        val lifted = fmap(() => s)(f)
+        lifted() == f(s)
+    }
 }

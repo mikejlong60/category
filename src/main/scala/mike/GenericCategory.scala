@@ -33,8 +33,5 @@ object Functor {
     def fmap[A, B](f: A => B): Function0[A] => Function0[B] = a => () => f(a())
   }
 
-//  implicit object Function1Functor extends Functor[Function1] {
-//    def fmap[A, B](f: A => B): Function1[A,A] => Function1[B,B] = a => (x: String) => f(a(x))
-//  }
 }
 
