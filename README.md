@@ -1,0 +1,1 @@
+  # Experiments on Categories and Functors from https://hseeberger.wordpress.com/2010/11/25/introduction-to-category-theory-in-scala/
