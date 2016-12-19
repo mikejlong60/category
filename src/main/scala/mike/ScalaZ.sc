@@ -30,41 +30,6 @@ def plusAH[A: PlusAdHoc](a1: A, a2: A): A = implicitly[PlusAdHoc[A]].plus(a1, a2
 // to their source code.
 // 3) the function definitions can be enabled ot disabled in different scopes
 
-def sum(xs: List[Int]): Int = xs.foldLeft(0) {_ + _}
-sum(List(12,13,14,154))
-
-//Here is a Monoid. Its a type for which there exists a function mappend that
-//produces another type of the same set and also has a function which produces
-//a zero.
-
-object IntMonoid {
-  def mappend(a: Int, b: Int): Int = a + b
-  def mzero: Int = 0
-}
-
-//Then we canz pull it in and generalize the sum function above.
-def sumG(xs: List[Int]): Int = xs.foldLeft(IntMonoid.mzero)(IntMonoid.mappend)
-sumG(List(12,13,14,154))
-
-trait Monoid[A] {
-  def mappend(a1: A, a2: A): A
-  def mzero: A
-}
-
-object IntMonoid2 extends Monoid[Int] {
-  def mappend(a: Int, b: Int): Int = a + b
-  def mzero: Int = 0
-}
-
-object StringMonoid2 extends Monoid[String] {
-  def mappend(a: String, b: String): String = s"$a$b"
-  def mzero: String = ""
-}
-
-def sumG2[A](xs: List[A], m: Monoid[A]): A = xs.foldLeft(m.mzero)(m.mappend)
-sumG2(List(12,13,14,154), IntMonoid2)
-
-
-sumG2(List("12","13","14","154"), StringMonoid2)
-
+import mike.Monoid._
+sum(List("12","13","14","154111"))
 
