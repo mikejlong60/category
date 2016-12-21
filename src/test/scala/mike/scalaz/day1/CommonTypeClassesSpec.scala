@@ -1,11 +1,12 @@
-package mike.scalaz
+package mike.scalaz.day1
 
-import scalaz._, Scalaz._
-import org.scalacheck.Prop.forAll
-import org.scalacheck.Properties
 import org.scalacheck.Prop.{BooleanOperators, forAll}
+import org.scalacheck.Properties
 
-class Day1Spec extends Properties("Equality, Ord, Show, Enum type classes") {
+import scalaz.Scalaz._
+import scalaz._
+
+class CommonTypeClassesSpec extends Properties("Equality, Ord, Show, Enum, Bounded type classes") {
 
   property("Int equality") = forAll { (i: Int) =>
     i === i
@@ -33,8 +34,19 @@ class Day1Spec extends Properties("Equality, Ord, Show, Enum type classes") {
 
   property("Show Int") = forAll { (i: Int) => i.show === s"$i" }
 
-  property("Enum Int") = forAll { (i: Int) =>
+  property("Enum Int") = forAll { (_: Int) =>
     val r = (100 |=> 2000).toList
     r.foldLeft(false)((_, x) => (x.succ gt x) && (x.pred lt x))
   }
+
+  property("Bounded Long") = forAll { (x:Int) =>
+    val max = implicitly[Enum[Long]].max
+    max.get gt x
+  }
+
+  property("Bounded Int") = forAll { (x:Short) =>
+    val max = implicitly[Enum[Int]].max
+    max.get gt x
+  }
+
 }
