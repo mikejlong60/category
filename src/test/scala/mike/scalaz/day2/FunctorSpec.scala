@@ -38,6 +38,11 @@ class FunctorSpec extends WordSpecLike with Matchers {
       (fu(List(6, 7))) should be (List(18, 21))
     }
 
+    "lift a function to an empty list" in new TestContext {
+      val fu = Functor[List].lift {(_: Int) * 3}
+      (fu(List())) should be (List())
+    }
+
     "lift a function to a Some Option." in new TestContext {
       val fu = Functor[Option].lift {(_: Int) * 3}
       (fu(Some(6))) should be (Some(18))
