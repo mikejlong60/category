@@ -30,7 +30,9 @@ class FunctorSpec extends WordSpecLike with Matchers {
     }
 
     "allow for Functions to be functors" in new TestContext {
-      ((((x: Int) => x + 1) map (_ * 10))(3)) should be(40)
+      val fu = (((x: Int) => x + 1) map (_ * 10))
+
+      (fu(3)) should be(40)
     }
 
     "lift a function to a list of ints" in new TestContext {
