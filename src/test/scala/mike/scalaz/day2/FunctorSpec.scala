@@ -9,13 +9,13 @@ class FunctorSpec extends WordSpecLike with Matchers {
 
   trait TestContext {
 
-    trait Functor[F[_]] { self =>
+    trait FunctorMe[F[_]] { self =>
       //Lift `f` into `F` and apply to `F[A]]`
       def map[A, B](fa: F[A])(f: A => B): F[B]
     }
 
-    trait FunctorOps[F[_], A] extends Ops[F[A]] {
-      implicit def F: Functor[F]
+    trait FunctorOpsMe[F[_], A] extends Ops[F[A]] {
+      implicit def F: FunctorMe[F]
 
       import Leibniz.===
 
@@ -24,7 +24,7 @@ class FunctorSpec extends WordSpecLike with Matchers {
 
   }
 
-  "Functor" must {
+  "ScalaZ Functor" must {
     "update only the last element for tuples" in new TestContext {
       ((1, 2, 3) map { _ + 1 }) should be((1, 2, 4))
     }
