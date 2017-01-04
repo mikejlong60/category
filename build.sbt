@@ -1,6 +1,6 @@
 import sbt.Keys.scalacOptions
 
-val scalazVersion = "7.1.0"
+val scalazVersion = "7.2.8"
 
 scalacOptions += "-feature"
 
@@ -17,7 +17,6 @@ lazy val root = (project in file(".")).
       "com.typesafe" % "config" % "1.3.1" % "test",
       "org.scalaz" %% "scalaz-core" % scalazVersion,
       "org.scalaz" %% "scalaz-effect" % scalazVersion,
-      "org.scalaz" %% "scalaz-typelevel" % scalazVersion,
       "org.scalaz" %% "scalaz-scalacheck-binding" % scalazVersion % "test"
     )
   )

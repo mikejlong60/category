@@ -125,7 +125,7 @@ class ApplicativeFunctorSpec extends WordSpecLike with Matchers {
 
         (sequenceA(List(1.some, 2.some))) should be (Some(List(1,2)))
 
-        (sequenceA(List(List(1,2,3), List(4,5,6)))) should be (List(1,4), List(1,5))
+        (sequenceA(List(List(1,2,3), List(4,5,6)))) should be (List(List(1,4), List(1,5), List(1,6), List(2,4), List(2,5), List(2,6), List(3,4), List(3,5), List(3,6)))
       }
     }
 
