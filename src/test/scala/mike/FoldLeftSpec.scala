@@ -4,6 +4,7 @@ import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
 import mike.FoldLeft._
 import mike.Monoid._
+import scala.language.higherKinds
 
 class FoldLeftSpec extends Properties("FoldLeft") {
 

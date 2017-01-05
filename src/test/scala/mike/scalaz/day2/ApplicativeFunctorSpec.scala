@@ -5,6 +5,7 @@ import org.scalatest.{Matchers, WordSpecLike}
 import scalaz.Scalaz._
 import scalaz._
 import scalaz.syntax.Ops
+import scala.language.higherKinds
 
 class ApplicativeFunctorSpec extends WordSpecLike with Matchers {
 

@@ -2,6 +2,8 @@ package mike
 
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
+import scala.language.higherKinds
+import scala.language.implicitConversions
 
 class MoniodOpSpec extends Properties("MoniodOp") {
 

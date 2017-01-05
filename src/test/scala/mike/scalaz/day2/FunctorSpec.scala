@@ -4,6 +4,7 @@ import org.scalatest.{Matchers, WordSpecLike}
 import scalaz.syntax.Ops
 import scalaz.Scalaz._
 import scalaz._
+import scala.language.higherKinds
 
 class FunctorSpec extends WordSpecLike with Matchers {
 

@@ -1,6 +1,8 @@
 package mike.scalaz.day1
 
 import org.scalatest.{Matchers, WordSpecLike}
+import scala.language.higherKinds
+import scala.language.implicitConversions
 
 class YesNoTypeClassSpec extends WordSpecLike with Matchers {
 

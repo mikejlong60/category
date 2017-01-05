@@ -5,6 +5,7 @@ import org.scalacheck.Properties
 
 import scalaz.Scalaz._
 import scalaz._
+import scala.language.higherKinds
 
 class CommonTypeClassesSpec extends Properties("Equality, Ord, Show, Enum, Bounded type classes") {
 

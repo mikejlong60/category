@@ -4,7 +4,7 @@ val scalazVersion = "7.2.8"
 
 scalacOptions += "-feature"
 
-initialCommands in console := "import scalaz._, Scalaz._"
+initialCommands in console := "import scalaz._, Scalaz._, scala.language.higherKinds"
 
 lazy val root = (project in file(".")).
   settings(
