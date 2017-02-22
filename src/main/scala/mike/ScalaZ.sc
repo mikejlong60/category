@@ -11,7 +11,7 @@ trait Plus[A] {
 def plus[A <: Plus[A]](a1: A, a2: A): A = a1.plus(a2)
 
 //Now we can provide different definitions of plus for A. But its not
-//flexible because you since trait Plus has to be mixed in at the time
+//flexible because trait Plus has to be mixed in at the time
 //of defining the data type.  So it can't work for Int and String.
 
 
@@ -26,9 +26,9 @@ def plusAH[A: PlusAdHoc](a1: A, a2: A): A = implicitly[PlusAdHoc[A]].plus(a1, a2
 
 //This is better because:
 // 1) we can provide for different function defs for different types of A
-// 2) we cxan peovide function definitions to types(like String) without access
+// 2) we can provide function definitions to types(like String) without access
 // to their source code.
-// 3) the function definitions can be enabled ot disabled in different scopes
+// 3) the function definitions can be enabled or disabled in different scopes
 
 import mike.Monoid._
 sum(List("12","13","14","154111"))

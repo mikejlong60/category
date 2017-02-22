@@ -50,4 +50,4 @@ stackyStack = do
       then put [8,3,1]
       else put [9,2,1]
 
-      
+
