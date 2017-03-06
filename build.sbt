@@ -1,10 +1,12 @@
 import sbt.Keys.scalacOptions
 
-val scalazVersion = "7.2.8"
+val scalazVersion = "7.0.6"
 
 scalacOptions += "-feature"
 
 initialCommands in console := "import scalaz._, Scalaz._, scala.language.higherKinds"
+
+initialCommands in console in Test := "import scalaz._, Scalaz._, scalacheck.ScalazProperties._, scalacheck.ScalazArbitrary._,scalacheck.ScalaCheckBinding._"
 
 lazy val root = (project in file(".")).
   settings(
@@ -17,6 +19,7 @@ lazy val root = (project in file(".")).
       "com.typesafe" % "config" % "1.3.1" % "test",
       "org.scalaz" %% "scalaz-core" % scalazVersion,
       "org.scalaz" %% "scalaz-effect" % scalazVersion,
+      "org.scalaz" %% "scalaz-typelevel" % scalazVersion,
       "org.scalaz" %% "scalaz-scalacheck-binding" % scalazVersion % "test"
     )
   )
