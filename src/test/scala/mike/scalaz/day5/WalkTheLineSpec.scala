@@ -45,12 +45,43 @@ class WalkTheLineSpec extends WordSpecLike with Matchers {
     "make functions that ignore their input parameter and just return a predetermined monadic value, in this case none from 4.some >> none" in {
       4.some >> none should be(empty)
     }
-    "use `for` syntax" in {
+    "use `for` syntax with some options" in {
       val s = for {
         x <- 3.some
         y <- "hi".some
       } yield (x.shows + y)
       s should be (Some("3hi"))
+    }
+    "use `for` syntax with a tightrope walker routine" in new TestContext {
+      val routine = for {
+        start <- Monad[Option].point(Pole(0,0))
+        first <- start.landLeft(2)
+        second <- first.landRight(2)
+        third <- second.landLeft(1)
+      } yield third
+      routine should be (Some(Pole(3,2)))
+    }
+    "use `for` syntax with a tightrope walker routine where the guy falls" in new TestContext {
+      val routine = for {
+        start <- Monad[Option].point(Pole(0,0))
+        first <- start.landLeft(2)
+        oops <- (none: Option[Pole])
+        second <- first.landRight(2)
+        third <- second.landLeft(1)
+      } yield third
+      routine should be (empty)
+    }
+    "use pattern matching in `for` syntax" in {
+      val justH = for {
+        (x :: xs) <- "hello".toList.some
+      } yield x
+      justH should be (Some('h'))
+    }
+    "show pattern matching failure in `for` syntax" in {
+      val no = for {
+        (x :: xs) <- "".toList.some
+      } yield x
+      no should be (none)
     }
   }
 }
