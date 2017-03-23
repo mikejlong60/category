@@ -1,12 +1,6 @@
 package mike.scalaz.day5
 
-import scala.language.higherKinds
-import scalaz._
-import Scalaz._
-import scala.language.higherKinds
-import scalaz.scalacheck.ScalazProperties.functor
-import org.scalacheck.{Gen, Arbitrary}
-import scalaz._, Scalaz._, scalacheck.ScalazProperties._, scalacheck.ScalazArbitrary._, scalacheck.ScalaCheckBinding._
+import scalaz._, Scalaz._
 import org.scalatest.{Matchers, WordSpecLike}
 
 class WalkTheLineSpec extends WordSpecLike with Matchers {

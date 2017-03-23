@@ -2,9 +2,7 @@ package mike.scalaz.day5
 
 import org.scalatest.{Matchers, WordSpecLike}
 
-import scala.language.higherKinds
 import scalaz.Scalaz._
-import scalaz._
 
 class ListMonadSpec extends WordSpecLike with Matchers {
 
