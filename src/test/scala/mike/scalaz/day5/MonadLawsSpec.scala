@@ -24,7 +24,7 @@ class MonadLawsSpec extends FlatSpec with Matchers {
 
   "Left Identity Law says that when you take a value, " +
     "put it in a default context with return(or point in this case), " +
-    "and then feed it to a function by using >>=, the result" must
+    "and then feed it to a function by using >>=(same as flatMap), the result" must
     "be the same as taking the value and applying the function to it." in {
       (Monad[Option].point(3) >>= { x => (x + 10000).some }) should be(3 |> { x => (x + 10000).some })
     }
