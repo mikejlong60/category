@@ -12,10 +12,7 @@ class ReaderSpec extends WordSpecLike with Matchers {
 
     val g = ({ (_: Int) * 2 } |@| { (_: Int) + 10 }) { _ + _ }
 
-    val addStuff: Int => Int = for {
-      a <- (_: Int) * 2
-      b <- (_: Int) + 10
-    } yield a + b
+    val addStuff: Int => Int = ((_: Int) * 2).flatMap(a => ((_: Int) + 10).map(b => a + b))
 
   }
 
