@@ -48,10 +48,7 @@ class TaggedTypesSpec extends WordSpecLike with Matchers {
     "update only the last element for tuples" in {
       val now = System.currentTimeMillis()
       val twelveHours = now + (1000 * 60 * 60 * 12)
-      println(now)
-      println(twelveHours)
       val r = DaytimeRange(epochtimeToDaytime(now), epochtimeToDaytime(twelveHours))
-      println(r)
       true should be(true)
     }
   }

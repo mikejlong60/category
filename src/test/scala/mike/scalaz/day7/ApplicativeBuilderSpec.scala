@@ -17,7 +17,6 @@ class ApplicativeBuilderSpec extends WordSpecLike with Matchers {
 
     "allow you to compose List as a functor.  This is just like a for comprehension" in {
       val a = (List(1,2) |@| List(4,5) |@| List(7,8)) { (x, y, z) => {
-        println(s"$x, $y, $z")
         x + y + z
       }}
       val e = List(12,13,13,14,13,14,14,15)

@@ -22,7 +22,6 @@ class ListMonadSpec extends WordSpecLike with Matchers {
         n <- List(1, 2)
         ch <- List('a', 'b')
       } yield (n, ch)
-      println(r)
       r should be(List((1,'a'), (1, 'b'), (2, 'a'), (2, 'b')))
     }
   }
