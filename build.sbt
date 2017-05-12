@@ -1,8 +1,10 @@
 import sbt.Keys.scalacOptions
 
-val scalazVersion = "7.0.6"
+val scalazVersion = "7.1.13"
 
 scalacOptions += "-feature"
+
+scalacOptions += "-Xprint:typer"
 
 initialCommands in console := "import scalaz._, Scalaz._, scala.language.higherKinds"
 

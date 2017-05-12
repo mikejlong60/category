@@ -1,9 +1,7 @@
 package mike.scalaz.day6
 
 import org.scalatest.{Matchers, WordSpecLike}
-
 import scalaz.Scalaz._
-import scalaz.{Monoid, Writer}
 
 class ReaderSpec extends WordSpecLike with Matchers {
 
