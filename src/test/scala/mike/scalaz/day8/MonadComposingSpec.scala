@@ -27,7 +27,6 @@ class MonadComposingSpec extends Properties("FoldLeftM") {
     val g = Kleisli {(x: Int) => (x * 100).some}
 
     val a = i1.some >>= (f >==> g)
-    println(s"i1=$i1 a=$a")
 
     val e = (i1 + 1) * 100
 

@@ -14,21 +14,15 @@ class MyMonadSpec extends WordSpecLike with Matchers {
       import mike.scalaz.day8.mymonad.fred._
       val a = flipThree
 
-      println("a-"+a)
-      true should be (false)
-      //a == 12
+      val e = Prob(List((true,0.025), (false,0.225), (false,0.025), (false,0.225), (false,0.025), (false,0.225), (false,0.025), (false,0.225)))
+      a should be (e)
     }
 
     "map over a list" in {
       val a = Prob(List((12, 0.5), (14, 0.25), (16, 0.25))) map (x => x + 12)
 
-      println(a)
       val e = Prob(List((12 + 12, 0.5), (14 + 12, 0.25), (16 + 12, 0.25)))
       a should be (e)
-
-      //      val aa = a.point//.flatMap(x: Int => x)
-      //      println(aa)
-
     }
   }
 }

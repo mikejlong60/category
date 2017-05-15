@@ -15,8 +15,8 @@ class MonadFlattenSpec extends Properties("Flatten") {
   }
 
   property("Flatten two lists into one") = forAll { (ints: List[Int]) =>
-    val (a1, a2) = ints.splitAt(ints.length/2)
-    val a = List(a1,a2).join
+    val (a1, a2) = ints.splitAt(ints.length / 2)
+    val a = List(a1, a2).join
     a == ints
   }
 

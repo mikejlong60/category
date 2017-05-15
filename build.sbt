@@ -4,7 +4,7 @@ val scalazVersion = "7.1.13"
 
 scalacOptions += "-feature"
 
-scalacOptions += "-Xprint:typer"
+//scalacOptions += "-Xprint:typer"  //uncomment to see implicits, etc.
 
 initialCommands in console := "import scalaz._, Scalaz._, scala.language.higherKinds"
 
