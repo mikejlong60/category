@@ -31,14 +31,18 @@ class ApplicativeStyleSpec extends WordSpecLike with Matchers {
 
   "When combining Applicative Functors you can fuse idiomatic effects into one, their product. " +
     "Here we append two tuples of (List, Option)" in {
-      val a = ((List(1), 1.some) |@| (List(2), 2.some)) { _ |+| _ }
+      val a = ((List(1), 1.some) |@| (List(2), 2.some)) {
+        _ |+| _
+      }
       val e = (List(1, 2), Some(3))
       a should be(e)
     }
 
   "When combining Applicative Functors you can fuse idiomatic effects into one, their product. " +
     "Here we append two tuples of (List, try), one try being a failure" in {
-      val a = ((List(1), 1.success[String]) |@| (List(2), "boom".failure[Int])) { _ |+| _ }
+      val a = ((List(1), 1.success[String]) |@| (List(2), "boom".failure[Int])) {
+        _ |+| _
+      }
       val e = (List(1, 2), Failure("boom"))
       a should be(e)
     }
@@ -53,11 +57,21 @@ class ApplicativeStyleSpec extends WordSpecLike with Matchers {
 
   "The ⊗ and ⊙ operators allow you to combine applicative-style computations in" +
     "two different ways: parallel and sequential. Here we use traverse for a list, " +
-    "the same as parallel in ScalaZ" in {
+    "the same as parallel in ScalaZ.  " must {
+      "If the condition is not met the whole expression returns " +
+        "none.  Traverse combines flatMap and sequence I think." in {
 
-      val a = List(1, 2, 3) traverse { x => (x > 0) option (x + 1) }
-      val e = Some(List(2, 3, 4))
-      a should be(e)
+        val a = List(1, 2, 3) traverse { x => (x > 2) option (x + 1) }
+        a should be(none)
+      }
+
+      "If the condition is met the expression returns a new list incrememented by the " +
+        "function. Traverse combines flatMap and sequence I think." in {
+
+        val a = List(1, 2, 3) traverse { x => (x > 0) option (x + 1) }
+        val e = Some(List(2, 3, 4))
+        a should be(e)
+      }
+
     }
-
 }
