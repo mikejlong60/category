@@ -61,17 +61,22 @@ class ApplicativeStyleSpec extends WordSpecLike with Matchers {
       "If the condition is not met the whole expression returns " +
         "none.  Traverse combines flatMap and sequence I think." in {
 
-        val a = List(1, 2, 3) traverse { x => (x > 2) option (x + 1) }
-        a should be(none)
-      }
+          val a = List(1, 2, 3) traverse { x => (x > 2) option (x + 1) }
+          a should be(none)
+        }
 
       "If the condition is met the expression returns a new list incrememented by the " +
         "function. Traverse combines flatMap and sequence I think." in {
 
-        val a = List(1, 2, 3) traverse { x => (x > 0) option (x + 1) }
-        val e = Some(List(2, 3, 4))
+          val a = List(1, 2, 3) traverse { x => (x > 0) option (x + 1) }
+          val e = Some(List(2, 3, 4))
+          a should be(e)
+        }
+
+      "For a monoidal applicative functor, traversal accumulates values." in {
+        val a = Monoid[Int].applicative.traverse(List(1, 2, 3)) { x => x + 1 }
+        val e = 9
         a should be(e)
       }
-
     }
 }
