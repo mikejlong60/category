@@ -79,4 +79,40 @@ class ApplicativeStyleSpec extends WordSpecLike with Matchers {
         a should be(e)
       }
     }
+
+  "Shape and contents" must {
+    "be paramametrically polymorphic in the collection elements as well as being parameterized" +
+      "along two other dimensions: the datatype being traversed, and the applicative functor" +
+      "in which the traversal is interpreted. Specializing the applicative functor as a monoid" +
+      "yields a generic contents operation." in {
+
+        def contents[F[_]: Traverse, A](f: F[A]): List[A] = Monoid[List[A]].applicative.traverse(f) { List(_) }
+
+        val a = contents(List(1, 2, 3, 4, 5))
+        a should be(List(1, 2, 3, 4, 5))
+
+        val a2 = contents(List(Some(1), Some(2), Some(3), none))
+        a2 should be(List(Some(1), Some(2), Some(3), none))
+
+        val a3 = contents('P'.node('O'.leaf, 'L'.leaf))
+        a3 should be(List('P','O','L'))
+
+      }
+
+      "Take any data structure that supports the traverse method and turn" +
+        " it into a list and rewrite contents using that Traverse" in {
+
+        def contents[F[_]: Traverse, A](f: F[A]): List[A] =  f.traverse[({type l[X] = List[A]})#l, A] {List(_)}
+
+        val a = contents(List(1, 2, 3, 4, 5))
+        a should be(List(1, 2, 3, 4, 5))
+
+        val a2 = contents(List(Some(1), Some(2), Some(3), none))
+        a2 should be(List(Some(1), Some(2), Some(3), none))
+
+        val a3 = contents('P'.node('O'.leaf, 'L'.leaf))
+        a3 should be(List('P','O','L'))
+
+      }
+  }
 }
