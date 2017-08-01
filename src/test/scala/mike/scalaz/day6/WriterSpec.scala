@@ -1,7 +1,7 @@
 package mike.scalaz.day6
 
 import org.scalatest.{Matchers, WordSpecLike}
-
+import scala.language.postfixOps
 import scalaz.{Monad, Monoid, Writer}
 import scalaz.Scalaz._
 
