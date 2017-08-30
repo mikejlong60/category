@@ -6,6 +6,7 @@ import scalaz._
 import Scalaz._
 import effect._
 import ST._
+import scala.annotation.tailrec
 
 class StateThreadSpec extends WordSpecLike with Matchers {
 
